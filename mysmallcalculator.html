@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 450px;
+            height: 805px;
+            border: none;
+            border-radius: 15px;
+            margin-left: 500px;
+            background-color: #D7D7D7;
+            box-shadow: 2px 2px 9px;
+        }
+        h1{
+            border: none;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 1px -1px 3px;
+	        color: black;
+            background: transparent; 
+        }
+        p{
+            color: black;
+            font-weight:400;
+            text-align:center;
+        }
+        #prt{
+            width: 60px;
+            border-radius: 35px;
+            padding:20px;
+            background: #a19490;
+            font-size: 20px;
+            font-weight: bold;    
+            cursor: pointer;  
+        }
+        .formstyle{
+            box-shadow: 2px -3px 5px #372222;
+            width: 300px;
+            height: 648px;
+            margin: auto;
+            border-radius:35px ;
+            border: 0 solid black;
+            padding: 20px;
+            background-color: #a19472;
+           
+        }
+        input{
+            box-shadow: 4px 5px 9px ;
+            width: 60px;
+            height: 75px;
+            color: black;
+            /* background: #a19490; */
+            background: transparent;
+            border: 0px solid #fff;
+            border-radius: 35px;
+	        padding: 26px;
+            margin: 5px;
+	        font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #display{
+            box-shadow: 2px -2px 5px black ;
+            width: 250px;
+            border: 1.5px solid black;
+	        border-radius: 15px;
+	        padding: 20px;
+	        margin: auto;
+            background-color: #595959;
+        }
+        #eqaul{
+            background-color: orangered;
+            cursor: pointer;
+        }
+        #clear{
+            background-color: lightcoral;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+  <h1>VIVEK SHARMA</h1>
+  <div class="formstyle">
+    <p>Vivek kumar <br> 92201703084</p>
+    <form name="form1">
+
+        <input type="text" name="answer" id="display" disabled><br><br>
+        <input type="button" value="C" onclick="form1.answer.value=' ' " id="clear">
+        <input type="button" value="%" onclick="form1.answer.value+='%'" id="prt">
+        <input type="button" value="N" onclick="form1.answer.value='0' " id="prt">
+        <input type="button" value="/" onclick="form1.answer.value+='/' " id="prt">
+        <input type="button" value="7" onclick="form1.answer.value+='7'">
+        <input type="button" value="8" onclick="form1.answer.value+='8'">
+        <input type="button" value="9" onclick="form1.answer.value+='9'">
+        <input type="button" value="x" onclick="form1.answer.value+='*'" id="prt">
+        <input type="button" value="4" onclick="form1.answer.value+='4'">
+        <input type="button" value="5" onclick="form1.answer.value+='5'">
+        <input type="button" value="6" onclick="form1.answer.value+='6'">
+        <input type="button" value="-" onclick="form1.answer.value+='-'" id="prt">
+        <input type="button" value="1" onclick="form1.answer.value+='1'">
+        <input type="button" value="2" onclick="form1.answer.value+='2'">
+        <input type="button" value="3" onclick="form1.answer.value+='3'">
+        <input type="button" value="+" onclick="form1.answer.value+='+'" id="prt">
+        <input type="button" value="00" onclick="form1.answer.value+='00'">
+        <input type="button" value="0" onclick="form1.answer.value+='0'">
+        <input type="button" value="." onclick="form1.answer.value+='.'">
+        <input id="eqaul" type="button" value="=" onclick="form1.answer.value = eval(form1.answer.value)" >
+    </form>
+  </div>
+  <h1>VIVEK SHARMA</h1>
+</div>
+</body>
+</html>
