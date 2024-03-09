@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mode changing</title>
+    <style>
+   
+    #mode{
+        width: 200px;
+        height: 100px;
+        border-radius: 85px;
+        border: none;
+        background-color: cadetblue;
+        font-weight: bold;
+        box-shadow: inset 2px 2px 10px;
+        margin-top: 15px;
+        font-size: 35px;
+    }
+  
+    .dark{
+        background-color: black;
+        color: white;
+    }
+     .light{
+        background-color: white;
+        color: black;
+    }
+
+</style>
+</head>
+<body>
+    <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore labore odio blanditiis unde omnis placeat eveniet? Commodi, iure quae voluptates qui ducimus a aliquam obcaecati praesentium incidunt perspiciatis facilis error?
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis, eveniet deleniti aliquam reiciendis numquam et ex voluptatum placeat fugit ipsam voluptatem veniam doloremque accusamus doloribus eos iure! Doloribus, accusamus velit!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias cum mollitia consequatur quas doloremque itaque debitis eius similique. Ducimus velit aperiam minima sed dolores quo. Odio exercitationem laborum laboriosam minima!Lorem loe
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla deleniti ea debitis perferendis odio quas voluptatibus odit. Aliquam minus, ea, corrupti asperiores saepe et dolore libero totam voluptatem nulla eum!
+    </h3>
+   <button id="mode"> mode change </button>
+
+   <script>
+        let btn = document.querySelector("#mode");
+        let  body = document.querySelector("body");
+        let currmode = "light";
+
+        btn.addEventListener('click' , () =>{
+            if(currmode == "light"){
+                currmode = "dark";
+                body.classList.add("dark");
+                body.classList.remove("light");
+            }
+            else{
+                currmode = "light";
+                body.classList.add("light");
+                body.classList.remove("dark");
+            }
+        })
+   </script>
+</body>
+</html>
