@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Come, First Served (FCFS)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: inset 10px 10ox 10px rgba(0, 0, 0, 0.1);
+        
+    }
+    h2,h1 {
+        text-align: center;
+        color: #333;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #666;
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        display: block;
+        width: 100%;
+        padding: 20px 0;
+        margin-top: 10px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+    #output {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <p style="color: red; font-weight: bold;">created by Vivek sharma</p>
+    <h2>First Come, First Served (FCFS) </h2>
+
+    <label for="numProcesses"><strong>The number of processes : </strong></label>
+    <input type="number" id="numProcesses" class="form-control" placeholder="minimum 2" required>
+    <button onclick="getInputs()" class="btn btn-primary">Submit</button>
+    <div id="inputs"></div>
+    <button onclick="calculate()" class="btn btn-danger">Calculate</button>
+    <div id="output"></div>
+</div>
+
+<script>
+    // Function to dynamically generate input fields based on the number of processes
+    function getInputs() {
+        // Get the number of processes from the input field
+        var numProcesses = document.getElementById("numProcesses").value;
+        // Get the container div where inputs will be added
+        var inputsDiv = document.getElementById("inputs");
+        // Clear any existing content inside the container
+        inputsDiv.innerHTML = ""; 
+
+        // Loop to create input fields for each process
+        for (var i = 0; i < numProcesses; i++) {
+            // Create label for arrival time input
+            var arrivalLabel = document.createElement("label");
+            arrivalLabel.innerHTML = "Arrival Time for Process " + (i + 1) + ": ";
+            // Create input field for arrival time
+            var arrivalInput = document.createElement("input");
+            arrivalInput.setAttribute("type", "number");
+            arrivalInput.setAttribute("id", "arrival" + i);
+            // Append label and input field to the container
+            inputsDiv.appendChild(arrivalLabel);
+            inputsDiv.appendChild(arrivalInput);
+
+            // Create label for burst time input
+            var burstLabel = document.createElement("label");
+            burstLabel.innerHTML = "Burst Time for Process " + (i + 1) + ": ";
+            // Create input field for burst time
+            var burstInput = document.createElement("input");
+            burstInput.setAttribute("type", "number");
+            burstInput.setAttribute("id", "burst" + i);
+            // Append label and input field to the container
+            inputsDiv.appendChild(burstLabel);
+            inputsDiv.appendChild(burstInput);
+
+            // Add line break for better spacing
+            inputsDiv.appendChild(document.createElement("br"));
+        }
+    }
+
+    // Function to calculate waiting time and turnaround time for each process
+    function calculate() {
+        // Get the number of processes from the input field
+        var numProcesses = document.getElementById("numProcesses").value;
+        // Arrays to store arrival times, burst times, waiting times, and turnaround times
+        var at = [];
+        var bt = [];
+
+        // Loop to retrieve arrival times and burst times from input fields
+        for (var i = 0; i < numProcesses; i++) {
+            at.push(parseInt(document.getElementById("arrival" + i).value));
+            bt.push(parseInt(document.getElementById("burst" + i).value));
+        }
+
+        // Arrays to store waiting times and turnaround times
+        var wt = [];
+        var tat = [];
+        // Initialize waiting time for the first process as 0
+        wt[0] = 0;
+
+        // Generate output table header
+        var output = "<h3>Process Scheduler Output</h3>";
+        output += "<table>";
+        output += "<tr><th>P.No.</th><th>Arrival Time</th><th>Burst Time</th><th>Waiting Time</th><th>Turnaround Time</th></tr>";
+        // Display the first process information
+        output += "<tr><td>1</td><td>" + at[0] + "</td><td>" + bt[0] + "</td><td>" + wt[0] + "</td><td>" + bt[0] + "</td></tr>";
+
+        // Loop to calculate waiting time and turnaround time for subsequent processes
+        for (var i = 1; i < numProcesses; i++) {
+            // Calculate waiting time for the current process
+            wt[i] = (at[i - 1] + bt[i - 1] + wt[i - 1]) - at[i];
+            // Calculate turnaround time for the current process
+            tat[i] = wt[i] + bt[i];
+            // Display process information in the output table
+            output += "<tr><td>" + (i + 1) + "</td><td>" + at[i] + "</td><td>" + bt[i] + "</td><td>" + wt[i] + "</td><td>" + tat[i] + "</td></tr>";
+        }
+
+        // Close the output table
+        output += "</table>";
+
+        // Calculate total waiting time and turnaround time
+        var sumWT = wt.reduce((a, b) => a + b, 0);
+        var sumTAT = tat.reduce((a, b) => a + b, 0);
+        // Calculate average waiting time and turnaround time
+        var averageWT = sumWT / numProcesses;
+        var averageTAT = sumTAT / numProcesses;
+
+        // Display average waiting time and turnaround time
+        output += "<p>Average waiting time = " + averageWT.toFixed(2) + "</p>";
+        output += "<p>Average turnaround time = " + averageTAT.toFixed(2) + "</p>";
+
+        // Display the output in the designated output div
+        document.getElementById("output").innerHTML = output;
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js
+"></script>
+</body>
+</html>

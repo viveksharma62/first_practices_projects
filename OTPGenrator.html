@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Generator</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">OTP Generator</h1>
+    <div class="form-group">
+      <label for="phoneNumber">Enter Phone Number:</label>
+      <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your phone number">
+    </div>
+    <button id="generateOTP" class="btn btn-primary">Generate OTP</button>
+    <div id="otpDisplay" class="mt-4"></div>
+  </div>
+
+  <script>
+    // Function to generate a random OTP
+function generateOTP() {
+  return Math.floor(1000 + Math.random() * 9000); // Generates a 4-digit OTP
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const generateOTPButton = document.getElementById('generateOTP');
+  const otpDisplay = document.getElementById('otpDisplay');
+
+  generateOTPButton.addEventListener('click', function() {
+    const phoneNumberInput = document.getElementById('phoneNumber');
+    const phoneNumber = phoneNumberInput.value.trim();
+
+    if (phoneNumber.length !== 10 || isNaN(phoneNumber)) {
+      alert('Please enter a valid 10-digit phone number.');
+      return;
+    }
+
+    const otp = generateOTP();
+    otpDisplay.innerHTML = `<p>Your OTP is: <strong>${otp}</strong></p>`;
+  });
+});
+
+  </script>
+</body>
+</html>
