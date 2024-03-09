@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Camera</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #cameraContainer {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #cameraFeed {
+            width: 800px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="m-5">Laptop Camera</h1>
+        <button id="openCameraBtn" class="btn btn-primary">Open Camera</button>
+        <button id="closeCameraBtn" class="btn btn-danger" style="display: none;">Close Camera</button>
+        <div id="cameraContainer">
+            <video id="cameraFeed" autoplay muted></video>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const openCameraBtn = document.getElementById('openCameraBtn');
+        const closeCameraBtn = document.getElementById('closeCameraBtn');
+        const cameraContainer = document.getElementById('cameraContainer');
+        const videoElement = document.getElementById('cameraFeed');
+        let stream;
+
+        openCameraBtn.addEventListener('click', async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoElement.srcObject = stream;
+                videoElement.play();
+                cameraContainer.style.display = 'block';
+                openCameraBtn.style.display = 'none';
+                closeCameraBtn.style.display = 'inline-block';
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                alert('Error accessing camera. Make sure your device has a camera and permissions are granted.');
+            }
+        });
+
+        closeCameraBtn.addEventListener('click', () => {
+            if (stream) {
+                const tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
+                videoElement.srcObject = null;
+                cameraContainer.style.display = 'none';
+                openCameraBtn.style.display = 'inline-block';
+                closeCameraBtn.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
