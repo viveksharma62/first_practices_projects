@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <style>
+        body{
+    background-color: #D7D7D7;
+
+}
+
+.container{
+    width: 500px;
+    height: 830px;
+    border: none;
+    border-radius: 25px;
+    margin-left: 500px;
+    /* background-color: #D7D7D7; */
+    /* background-color: #eeeee4; */
+    background-color: #FBE5C8;
+    box-shadow:inset 2px 3px 9px;
+}
+#value{
+    box-shadow:inset 2px -2px 5px black ;
+    width: 380px;
+    border: 1.5px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    margin-left: 30px;
+    /* background-color: #595959;  */
+    background-color: #B6E5D8; 
+    font-size: 40px;
+    text-align: right;
+    color: black;
+    
+}
+input,button{
+    box-shadow: 4px 5px 9px ;
+    width: 60px;
+    height: 75px;
+    color: black;
+    /* background: #a19490; */
+    background: transparent;
+    border: 0px solid #fff;
+    border-radius: 35px;
+    padding: 26px;
+    margin: 5px 0 0 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+button{
+    text-align: center;
+
+}
+h1{
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+#equal{
+    background-color: orangered;
+            cursor: pointer;
+}
+#prt{
+    width: 60px;
+    border-radius: 35px;
+    padding:20px;
+    background: #a19490;
+    font-size: 20px;
+    font-weight: bold;    
+    cursor: pointer;  
+}
+#clear{
+    background-color: lightcoral;
+    cursor: pointer;
+}
+#brcket{
+    background-color: #9aede2;
+}
+#name{
+    width: 300px;
+    box-shadow: inset 5px 5px 10px;
+    font-weight: bold;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Scientific Calculator</h1>
+    <input id="value" type="text" placeholder="0" disabled><br><br>
+    <button onclick="backspace()" id="clear">CE</button>
+    <button onclick="factorial()">x!</button>
+    <button class="btn" id="brcket">(</button>
+    <button class="btn" id="brcket">)</button>
+    <button class="btn" id="prt">%</button>
+    <button onclick="clearInput()" id="clear">CLR</button><br><br>
+
+    <button onclick="sin()">sin</button>
+    <button onclick="pi()">&#8508;</button>
+    <button class="btn">7</button>
+    <button class="btn">8</button>
+    <button class="btn">9</button>
+    <button class="btn" id="prt">/</button><br><br>
+
+    <button onclick="cos()">cos</button>
+    <button onclick="log()">log</button>
+    <button class="btn">4</button>
+    <button class="btn">5</button>
+    <button class="btn">6</button>
+    <button class="btn" id="prt">*</button><br><br>
+
+    <button onclick="tan()">tan</button>
+    <button onclick="sqrt()">&#8730;</button>
+    <button class="btn">1</button>
+    <button class="btn">2</button>
+    <button class="btn">3</button>
+    <button class="btn" id="prt">-</button><br><br>
+
+    <button onclick="e()">e</button>
+    <button onclick="squre()">x<sup>2</sup></button>
+    <button class="btn">0</button>
+    <button class="btn">.</button>
+    <button id="equal" onclick="equal()">=</button>
+    <button class="btn" id="prt">+</button><br><br>
+    
+    <button onclick="radian()">Rad</button>
+    <button onclick="degree()">Deg</button>
+    <button id="name">Vivek kr sharma</button>
+</div>
+
+    <script>
+        var displayValue=document.getElementById('value');
+var getValue=document.querySelectorAll('.btn');
+
+for(item of getValue){
+    item.addEventListener('click',function(e){
+        let text=e.target.innerHTML;
+        displayValue.value+=text;
+    });
+};
+function backspace(){
+    displayValue.value=displayValue.value.substr(0,displayValue.value.length-1);
+};
+function factorial(){
+    var i,num,f;
+    f=1;
+    num=displayValue.value;
+    for(i=1;i<=num;i++){
+        f=f*i;
+    }
+    displayValue.value=f;
+};
+function clearInput(){
+    displayValue.value = '';
+};
+
+function sin(){
+    displayValue.value=Math.sin(displayValue.value);
+};
+function pi(){
+    displayValue.value=3.14159;
+};
+function cos(){
+    displayValue.value=Math.cos(displayValue.value);
+};
+function log(){
+    displayValue.value=Math.log(displayValue.value);
+};
+function tan(){
+    displayValue.value=Math.tan(displayValue.value);
+};
+function sqrt(){
+    displayValue.value=Math.sqrt(displayValue.value);
+
+};
+function e(){
+    displayValue.value=2.718281;
+};
+function squre(){
+    displayValue.value=Math.pow(displayValue.value,2);
+};
+function equal(){
+    displayValue.value=eval(displayValue.value);
+};
+function radian(){
+    var radian=displayValue.value;
+    var answer=radian*(3.14/180);
+    displayValue.value=answer;
+};
+function degree() {
+    // Get the value from the input field
+    var degree = parseFloat(displayValue.value);
+
+    // Check if the input is a valid number
+    if (isNaN(degree)) {    
+        alert("Please enter a valid number");
+        return;
+    }
+
+    // Perform the conversion to degrees
+    var answer = degree * (180 / Math.PI);
+
+    // Update the input field with the result
+    displayValue.value = answer;
+}
+
+
+    </script>
+</body>
+</html>
